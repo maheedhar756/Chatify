@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 
-const userSchema = new mongoose.Schema(
-  {
+const userSchema = new mongoose.Schema({
     email: {
       type: String,
       required: true,
@@ -15,14 +14,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minLength: 6,
-      maxLength: 20
     },
     profilePic: {
       type: String,
       default: ""
     }
   },
-  { timestamps: true }
-)
+  { timestamps: true })
 
 export default mongoose.model("User", userSchema)

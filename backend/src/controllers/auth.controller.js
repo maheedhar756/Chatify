@@ -1,11 +1,15 @@
+import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
   const {fullname, email, password} = req.body
   try{
-    if(password.length < 6 || password.length > 20){
-      return res.status(400).json({ message: "Password must be between 6 and 20 characters" })
+    if(!fullname || !email || !password){
+      return res.status(400).json({ message: "All fields are required" })
+    }
+    if(password.length < 6){
+      return res.status(400).json({ message: "Password must be of minimum 6 characters" })
     }
     const user = await User.findOne({ email })
     if(user) return res.status(400).json({ message: "User already exists" })
@@ -14,20 +18,57 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt)
     const newUser = new User({ fullname, email, password: hashedPassword })
     if(newUser){
-      // generate JWT token here
+      generateToken(newUser._id, res)
+      await newUser.save()
+      res.status(201).json({
+        _id: newUser._id,
+        fullname: newUser.fullname,
+        email: newUser.email,
+        profilePic: newUser.profilePic,
+      })
     } else {
       return res.status(400).json({ message: "Invalid user data" })
     }
-
   } catch(err){
-    console.error(err)
+    console.error("Error in signupcontroller ", err.message)
+    res.status(500).json({ message: "Internal server error" })
   }
 };
 
-export const login = (req, res) => {
-  co
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+  try{
+    const user = await User.findOne({ email })
+    if(!user){
+      return res.status(400).json({ message: "Invalid Credentials" })
+    }
+    const isPassword = await bcrypt.compare(password, user.password)
+    if(!isPassword){
+      return res.status(400).json({ message: "Invalid Credentials" })
+    }
+    generateToken(user._id, res)
+    res.status(200).json({
+      _id: user._id,
+      fullname: user.fullname,
+      email: user.email,
+      profilePic: user.profilePic
+    })
+  } catch(err){
+    console.log("Error in login credentials ", err.message)
+    res.status(500).json({ message: "Internal server error" })
+  }
 };
 
 export const logout = (req, res) => {
-  res.send("Logout route")
+  try {
+    res.cookie("jwt_Token", "", {maxAge: 0})
+    res.status(200).json({ message: "Logged out successfully"})
+  } catch(err){
+    console.log("Error in logout controller ", err.message)
+        res.status(500).json({ message: "Internal server error" })
+  }
 };
+
+export const updateProfile = async (req, res) => {
+
+}
