@@ -5,7 +5,7 @@ import Login from './pages/Login.jsx'
 import Settings from './pages/Settings.jsx'
 import Profile from './pages/Profile.jsx'
 import { useEffect } from 'react'
-import {ScaleLoader} from "react-spinners"
+import {Loader} from "lucide-react"
 import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import { useAuthStore } from './store/useAuthStore.js'
@@ -20,13 +20,7 @@ function App() {
 
   if(isCheckingAuth && !authUser) return(
     <div className="flex items-center justify-center h-screen">
-      <ScaleLoader
-        barCount={6}
-        margin={4}
-        radius={10}
-        speedMultiplier={1.5}
-        color="#00ff00"
-      />
+      <Loader className="size-10 animate-spin"/>
     </div>
   )
 
