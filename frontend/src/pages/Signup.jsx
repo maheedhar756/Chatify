@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useAuthStore } from "../store/useAuthStore"
-import { MessageSquare, User} from "lucide-react"
+import { MessageSquare, User, Mail, Eye, EyeOff, Lock} from "lucide-react"
 function Signup() {
-  const [showPassword, setshowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -42,11 +42,53 @@ function Signup() {
                 <User />
                 <input
                   type="text"
-                  className={`w-full pl-2 border-0 focus:outline-none`}
+                  className="w-full pl-2 border-0 focus:outline-none"
                   placeholder="Enter your name"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 />
+              </div>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">Email</span>
+              </label>
+              <div className="flex border-1 p-2 rounded-xl">
+                <Mail />
+                <input
+                  type="email"
+                  className="w-full pl-2 border-0 focus:outline-none"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">Password</span>
+              </label>
+              <div className="flex border-1 p-2 rounded-xl">
+                <Lock />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="w-full pl-2 border-0 focus:outline-none"
+                  placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                />
+                <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5 text-gray-500" />
+                  ) : (
+                    <Eye className="h-5 w-5 text-gray-500" />
+                  )}
+                </span>
               </div>
             </div>
           </form>
