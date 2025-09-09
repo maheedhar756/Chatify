@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { useAuthStore } from "../store/useAuthStore"
-import { MessageSquare, User, Mail, Eye, EyeOff, Lock} from "lucide-react"
+import {Link} from "react-router-dom"
+import AuthImagePattern from "../components/AuthImagePattern"
+import { MessageSquare, User, Mail, Eye, EyeOff, Lock, Loader2} from "lucide-react"
+import toast from "react-hot-toast"
 function Signup() {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
@@ -11,7 +14,12 @@ function Signup() {
 
   const {signup, isSigningUp} = useAuthStore();
 
-  const validateForm = () => {}
+  const validateForm = () => {
+    if (!formData.fullName.trim()) return toast.error("Full name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required")
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
     
@@ -91,9 +99,35 @@ function Signup() {
                 </span>
               </div>
             </div>
+
+            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
+              {isSigningUp ? (
+                <>
+                  <Loader2 className="size-5 animate-spin"/>
+                  Loading...
+                </>
+              ) : (
+                "Create Account"
+              )}
+            </button>
           </form>
+
+          <div className="text-center">
+            <p className="text-base-content/60">
+              Already have an account?{" "}
+              <Link to="/login" className="link link-primary">
+                Sign in
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* right side */}
+      <AuthImagePattern
+        title="Join our community"
+        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+      />
     </div>
   )
 }
