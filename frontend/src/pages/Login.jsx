@@ -25,10 +25,9 @@ const Login = () => {
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
               <div
-                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
-              transition-colors"
+                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-teal-800 duration-700 group-hover:scale-110"
               >
-                <MessageSquare className="w-6 h-6 text-primary" />
+                <MessageSquare className="w-6 h-6 text-primary group-hover:bg-teal-800" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
               <p className="text-base-content/60">Sign in to your account</p>
@@ -37,22 +36,6 @@ const Login = () => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Full Name</span>
-              </label>
-              <div className="flex border-1 p-2 rounded-xl ">
-                <User />
-                <input
-                  type="text"
-                  className="w-full pl-2 border-0 focus:outline-none"
-                  placeholder="Enter your name"
-                  value={formData.fullname}
-                  onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
-                />
-              </div>
-            </div>
-
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
@@ -95,7 +78,7 @@ const Login = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full" disabled={isLoggingIn}>
+            <button type="submit" className="btn btn-primary w-full hover:bg-teal-600 hover:border-0 hover:shadow-none" disabled={isLoggingIn}>
               {isLoggingIn ? (
                 <>
                   <Loader2 className="size-5 animate-spin"/>
@@ -109,8 +92,8 @@ const Login = () => {
 
           <div className="text-center">
             <p className="text-base-content/60">
-              Don&apos;t have an account?{" "}
-              <Link to="/signup" className="link link-primary">
+              Don't have an account ?{" "}
+              <Link to="/signup" className="link link-primary font-semibold hover:text-teal-500">
                 Create account
               </Link>
             </p>
@@ -118,9 +101,8 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right Side - Image/Pattern */}
       <AuthImagePattern
-        title={"Welcome back!"}
+        title={"Welcome back !"}
         subtitle={"Sign in to continue your conversations and catch up with your messages."}
       />
     </div>
