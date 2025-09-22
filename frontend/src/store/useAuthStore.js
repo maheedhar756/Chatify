@@ -57,5 +57,9 @@ export const useAuthStore = create((set) => ({
     } catch (error) {
       toast.error(error.message.data.message)
     }
+  },
+
+  updateProfile: async (data) => {
+
   }
 }))
