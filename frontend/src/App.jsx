@@ -1,7 +1,7 @@
 import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
 import Signup from './pages/Signup.jsx'
-import Login from './pages/Login.jsx'
+import Signin from './pages/Signin.jsx'
 import Settings from './pages/Settings.jsx'
 import Profile from './pages/Profile.jsx'
 import { useEffect } from 'react'
@@ -29,11 +29,11 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={ authUser ? <Home /> : <Navigate to="/login"/> } />
+        <Route path="/" element={ authUser ? <Home /> : <Navigate to="/signin"/> } />
         <Route path="/signup" element={ !authUser ? <Signup /> : <Navigate to="/" /> } />
-        <Route path="/login" element={ !authUser ? <Login /> : <Navigate to="/" /> } />
+        <Route path="/signin" element={ !authUser ? <Signin /> : <Navigate to="/" /> } />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={authUser ? <Profile /> : <Navigate to="/signin" />} />
       </Routes>
       <Toaster/>
     </>

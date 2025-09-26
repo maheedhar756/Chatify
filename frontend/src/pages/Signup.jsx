@@ -40,8 +40,8 @@ const Signup = () => {
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-teal-800 duration-700 group-hover:scale-110">
-                <MessageSquare className="size-6 text-primary"/>
+              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center hover:bg-teal-800 duration-700 hover:scale-110">
+                <MessageSquare className="size-6 text-primary hover:text-teal-300"/>
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">Get started with your free account</p>
@@ -122,8 +122,8 @@ const Signup = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
-              <Link to="/login" className="link link-primary">
-                Sign in
+              <Link to="/signin" className="link link-primary font-semibold hover:text-teal-500">
+                Log in
               </Link>
             </p>
           </div>

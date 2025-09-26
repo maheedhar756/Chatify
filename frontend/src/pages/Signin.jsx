@@ -1,20 +1,20 @@
 import { useState } from "react"
 import { useAuthStore } from "../store/useAuthStore";
-import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
 import AuthImagePattern from "../components/AuthImagePattern";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Signin = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
-  const { login, isLoggingIn } = useAuthStore();
+  const { signin, isSigningIn } = useAuthStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    login(formData)
+    signin(formData)
   };
   return (
     <div className="h-screen grid lg:grid-cols-2">
@@ -23,9 +23,7 @@ const Login = () => {
         <div className="w-full max-w-md space-y-8">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div
-                className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-teal-800 duration-700 group-hover:scale-110"
-              >
+              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center hover:bg-teal-800 duration-700 hover:scale-110">
                 <MessageSquare className="size-6 text-primary hover:text-teal-300" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
@@ -76,8 +74,8 @@ const Login = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full hover:bg-teal-600 hover:border-0 hover:shadow-none" disabled={isLoggingIn}>
-              {isLoggingIn ? (
+            <button type="submit" className="btn btn-primary w-full hover:bg-teal-600 hover:border-0 hover:shadow-none" disabled={isSigningIn}>
+              {isSigningIn ? (
                 <>
                   <Loader2 className="size-5 animate-spin"/>
                   Loading...
@@ -107,4 +105,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signin
