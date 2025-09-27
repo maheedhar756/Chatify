@@ -1,8 +1,8 @@
-
-function Settings() {
+import ThemeSwitcher from "../components/ThemeSwitcher"
+const Settings = () => {
   return (
-    <div>
-      
+    <div className="min-h-screen">
+      <ThemeSwitcher />
     </div>
   )
 }

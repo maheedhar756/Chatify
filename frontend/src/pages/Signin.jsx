@@ -23,8 +23,8 @@ const Signin = () => {
         <div className="w-full max-w-md space-y-8">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center hover:bg-teal-800 duration-700 hover:scale-110">
-                <MessageSquare className="size-6 text-primary hover:text-teal-300" />
+              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center duration-700 hover:scale-110">
+                <MessageSquare className="size-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
               <p className="text-base-content/60">Sign in to your account</p>
@@ -74,7 +74,7 @@ const Signin = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full hover:bg-teal-600 hover:border-0 hover:shadow-none" disabled={isSigningIn}>
+            <button type="submit" className="btn btn-primary w-full hover:border-0 hover:shadow-none" disabled={isSigningIn}>
               {isSigningIn ? (
                 <>
                   <Loader2 className="size-5 animate-spin"/>
