@@ -27,7 +27,7 @@ function App() {
   )
 
   return (
-    <div data-theme={theme}>
+    <div data-theme={theme} className="bg-cover">
       <Navbar />
       <Routes>
         <Route path="/" element={ authUser ? <Home /> : <Navigate to="/signin" /> } />
