@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore"
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
 const Sidebar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
-  const onlineUsers = [];
+  const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getUsers()
@@ -25,7 +26,7 @@ const Sidebar = () => {
             <button 
               key={user.id} 
               onClick={() => setSelectedUser(user)}
-              className={`w-full p-3 items-center gap-3 hover:bg-base-300 transition-colors
+              className={`flex w-full p-3 items-center gap-3 transition-colors
               ${selectedUser?.id === user.id ? "bg-base-300 ring-1 ring-base-300" : ""}
               `}
             >
@@ -33,7 +34,7 @@ const Sidebar = () => {
                 <img 
                   src={user.profilePic || "/avatar.png"}
                   alt={user.name} 
-                  className="size-12 object-cover rounded-full"
+                  className="size-6 object-cover rounded-full"
                 />
                 {onlineUsers.includes(user.id) && (
                   <span className="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-2 ring-zinc-900" />
@@ -41,7 +42,7 @@ const Sidebar = () => {
               </div>
 
               <div className="hidden lg:block text-left min-w-0">
-                <div className="font-medium truncate">{user.fullName}</div>
+                <div className="font-medium">{user.fullname}</div>
                 <div className="text-sm text-zinc-400">
                   {onlineUsers.includes(user.id) ? "Online" : "Offline"}
                 </div>

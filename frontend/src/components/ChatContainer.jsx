@@ -1,8 +1,10 @@
+import { useChatStore } from "../store/useChatStore"
 
 const ChatContainer = () => {
+  const { messages, getMessages, isMessagesLoading } = useChatStore()
   return (
     <div>
-      
+      ChatContainer
     </div>
   )
 }
