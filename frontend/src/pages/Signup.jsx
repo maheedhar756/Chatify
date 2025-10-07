@@ -8,7 +8,7 @@ import toast from "react-hot-toast"
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
   })
@@ -16,7 +16,7 @@ const Signup = () => {
   const {signup, isSigningUp} = useAuthStore();
 
   const validateForm = () => {
-    if (!formData.fullname.trim()) return toast.error("Full name is required");
+    if (!formData.fullName.trim()) return toast.error("Full name is required");
     if (!formData.email.trim()) return toast.error("Email is required");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) return toast.error("Invalid email format");
     if (!formData.password) return toast.error("Password is required")
@@ -59,8 +59,8 @@ const Signup = () => {
                   type="text"
                   className="w-full pl-2 border-0 focus:outline-none"
                   placeholder="Enter your name"
-                  value={formData.fullname}
-                  onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 />
               </div>
             </div>
