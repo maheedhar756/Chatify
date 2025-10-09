@@ -23,7 +23,10 @@ const ChatHeader = () => {
           </div>
         </div>
 
-        <button onClick={() => setSelectedUser(null)}>
+        <button 
+          onClick={() => setSelectedUser(null)}
+          className="btn btn-circle hover:btn-warning"
+        >
           <X className="size-5 text-gray-500" />
         </button>
       </div>
