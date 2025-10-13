@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useRef } from "react"
 import { useChatStore } from "../store/useChatStore"
-import { Image, X } from "lucide-react"
+import { Image, Send, X } from "lucide-react"
+import toast from "react-hot-toast"
 
 const MessagesInput = () => {
   const [text, setText] = useState("")
@@ -10,13 +11,39 @@ const MessagesInput = () => {
   const { sendMessage } = useChatStore()
 
   const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if(!file.type.startsWith("image/")) {
+      toast.error("please select an image file");
+      return;
+    }
 
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    }
+    reader.readAsDataURL(file)
   }
 
-  const removeImage = () => {};
+  const removeImage = () => {
+    setImagePreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = ""
+  };
 
   const handleSendMessage = async(e) => {
+    e.preventDefault();
+    if (!text.trim() && !imagePreview) return;
 
+    try {
+      await sendMessage({
+        text: text.trim(),
+        image: imagePreview,
+      });
+      setText("");
+      setImagePreview(null);
+      if (fileInputRef.current) fileInputRef.current.value = ""
+    } catch (error) {
+      console.error("Failed to send message", error)
+    }
   }
   return (
     <div className="p-4 w-full">
@@ -43,14 +70,15 @@ const MessagesInput = () => {
         <div className="flex-1 flex gap-2">
           <input 
             type="text"
-            className="w-full input input-bordered rounded-lg input-sm sm:input-md"
+            className="w-full input rounded-lg input-sm sm:input-md focus:border-none"
+            placeholder="Type a message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
           <input 
             type="file"
             accept="image/*"
-            className="hidden"
+            className="hidden focus:border-none"
             ref={fileInputRef}
             onChange={handleImageChange}
           />
@@ -62,6 +90,13 @@ const MessagesInput = () => {
             <Image size={20}/>
           </button>
         </div>
+        <button 
+          className="btn btn-circle pr-1"
+          type="submit"
+          disabled={!text.trim() && !imagePreview}
+        >
+          <Send size={20}/>
+        </button>
       </form>
     </div>
   )
