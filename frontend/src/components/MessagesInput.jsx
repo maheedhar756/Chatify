@@ -45,6 +45,7 @@ const MessagesInput = () => {
       console.error("Failed to send message", error)
     }
   }
+  
   return (
     <div className="p-4 w-full">
       {imagePreview && (
@@ -57,7 +58,7 @@ const MessagesInput = () => {
             />
             <button
               onClick={removeImage}
-              className="absolute -top-1.5 -right-1.5 size-5 rounded-full bg-base-300 flex items-center justify-center"
+              className="absolute -top-1.5 -right-1.5 size-5 rounded-full bg-base-300 flex items-center justify-center cursor-pointer"
               type="button"
             >
               <X className="size-3"/>
