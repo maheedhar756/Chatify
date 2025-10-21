@@ -53,7 +53,7 @@ const Signup = () => {
               <label className="label">
                 <span className="label-text font-medium">Full Name</span>
               </label>
-              <div className="flex border-1 p-2 rounded-xl ">
+              <div className="flex border p-2 rounded-xl ">
                 <User />
                 <input
                   type="text"
@@ -69,7 +69,7 @@ const Signup = () => {
               <label className="label">
                 <span className="label-text font-medium">Email</span>
               </label>
-              <div className="flex border-1 p-2 rounded-xl">
+              <div className="flex border p-2 rounded-xl">
                 <Mail />
                 <input
                   type="email"
@@ -85,7 +85,7 @@ const Signup = () => {
               <label className="label">
                 <span className="label-text font-medium">Password</span>
               </label>
-              <div className="flex border-1 p-2 rounded-xl">
+              <div className="flex border p-2 rounded-xl">
                 <Lock />
                 <input
                   type={showPassword ? "text" : "password"}

@@ -1,5 +1,5 @@
 import { useChatStore } from "../store/useChatStore"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import ChatHeader from "./ChatHeader"
 import MessagesInput from "./MessagesInput"
 import MessageSkeleton from "./skeletons/MessageSkeleton"
@@ -7,12 +7,31 @@ import { useAuthStore } from "../store/useAuthStore"
 import { formatMessageTime } from "../lib/utils"
 
 const ChatContainer = () => {
-  const { messages, getMessages, isMessagesLoading, selectedUser } = useChatStore()
+  const { 
+    messages,
+    getMessages,
+    isMessagesLoading,
+    selectedUser,
+    subscribeToMessages,
+    unsubscribeToMessages
+  } = useChatStore()
   const { authUser } = useAuthStore()
+  const messageEndRef = useRef(null)
 
   useEffect(() => {
-    getMessages(selectedUser._id)
-  }, [selectedUser._id, getMessages])
+    if(!selectedUser) return;
+
+    getMessages(selectedUser._id);
+    subscribeToMessages();
+
+    return () => unsubscribeToMessages();
+  }, [selectedUser?._id, getMessages, subscribeToMessages, unsubscribeToMessages])
+
+  useEffect(() => {
+    if(messageEndRef.current){
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages])
 
   if(isMessagesLoading) {
     return (
@@ -32,7 +51,8 @@ const ChatContainer = () => {
         {messages.map((message) => (
           <div
             key={message._id}
-            className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}>
+            className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
+          >
             <div className="chat-image avatar">
               <div className="size-10 rounded-full border">
                 <img src={ message.senderId === authUser._id ? authUser.profilePic || "/avatar.png" : selectedUser.profilePic || "/avatar.png"} alt="profile pic" />
@@ -49,6 +69,7 @@ const ChatContainer = () => {
             </div>
           </div>
         ))}
+        <div ref={messageEndRef} />
       </div>
 
       <MessagesInput />
