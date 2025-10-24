@@ -23,7 +23,7 @@ export const signup = async (req, res) => {
       await newUser.save()
       res.status(201).json({
         _id: newUser._id,
-        fullname: newUser.fullname,
+        fullname: newUser.fullName,
         email: newUser.email,
         profilePic: newUser.profilePic,
       })
@@ -36,7 +36,7 @@ export const signup = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+export const signin = async (req, res) => {
   const { email, password } = req.body;
   try{
     const user = await User.findOne({ email })
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
     generateToken(user._id, res)
     res.status(200).json({
       _id: user._id,
-      fullname: user.fullname,
+      fullname: user.fullName,
       email: user.email,
       profilePic: user.profilePic
     })
