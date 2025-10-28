@@ -4,13 +4,15 @@ import express from "express";
 
 const app = express()
 const server = http.createServer(app)
+const FRONTEND = process.env.CORS_ORIGIN
 
 const io = new Server(server, {
   cors: {
-    origin: [ "https://chatify-sable.vercel.app", "http://localhost:5173"],
+    origin: [ FRONTEND, "http://localhost:5173"],
     methods: ["GET", "POST"],
     credentials: true
-  }
+  },
+  transports: ["websocket", "polling"]
 });
 
 export function getReceiverSocketId(userId) {
