@@ -6,6 +6,7 @@ import messageRoutes from "./routes/message.route.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import { app, server } from "./lib/socket.js"
+import path from "path"
 
 dotenv.config()
 
@@ -18,6 +19,7 @@ app.use(cors({
 }));
 
 const PORT = process.env.PORT || 5001
+const __dirname = 
 
 app.use("/api/auth", authRoutes)
 app.use("/api/messages", messageRoutes)
