@@ -4,15 +4,13 @@ import express from "express";
 
 const app = express()
 const server = http.createServer(app)
-const FRONTEND = process.env.CORS_ORIGIN
+// const FRONTEND = process.env.CORS_ORIGIN
 
 const io = new Server(server, {
   cors: {
-    origin: [ FRONTEND, "http://localhost:5173"],
-    methods: ["GET", "POST"],
+    origin: [ "http://localhost:5173" ],
     credentials: true
-  },
-  transports: ["websocket", "polling"]
+  }
 });
 
 export function getReceiverSocketId(userId) {
