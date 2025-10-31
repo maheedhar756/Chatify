@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useAuthStore } from "../store/useAuthStore";
-import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle , Lock, Mail, MessageSquare } from "lucide-react";
 import AuthImagePattern from "../components/AuthImagePattern";
 import { Link } from "react-router-dom";
 
@@ -74,11 +74,11 @@ const Signin = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full hover:border-0 hover:shadow-none" disabled={isSigningIn}>
+            <button type="submit" className="btn btn-primary w-full transition-colors" disabled={isSigningIn}>
               {isSigningIn ? (
                 <>
-                  <Loader2 className="size-5 animate-spin"/>
-                  Loading...
+                  <LoaderCircle className="size-5 animate-spin text-gray-400"/>
+                  <span className="text-gray-400">Loading...</span>
                 </>
               ) : (
                 "Signin"

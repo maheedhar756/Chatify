@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useAuthStore } from "../store/useAuthStore"
 import {Link} from "react-router-dom"
 import AuthImagePattern from "../components/AuthImagePattern"
-import { MessageSquare, User, Mail, Eye, EyeOff, Lock, Loader2} from "lucide-react"
+import { MessageSquare, User, Mail, Eye, EyeOff, Lock, LoaderCircle } from "lucide-react"
 import toast from "react-hot-toast"
 
 const Signup = () => {
@@ -107,11 +107,11 @@ const Signup = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
+            <button type="submit" className="btn btn-primary w-full transition-colors" disabled={isSigningUp}>
               {isSigningUp ? (
                 <>
-                  <Loader2 className="size-5 animate-spin"/>
-                  Loading...
+                  <LoaderCircle className="size-5 animate-spin text-gray-400"/>
+                  <span className="text-gray-400">Loading...</span>
                 </>
               ) : (
                 "Create Account"
