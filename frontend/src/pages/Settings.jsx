@@ -43,12 +43,10 @@ const Settings = () => {
           ))}
         </div>
 
-        {/* Preview Section */}
         <h3 className="text-lg font-semibold mb-3">Preview</h3>
         <div className="rounded-xl border border-base-300 overflow-hidden shadow-lg">
           <div className="p-4 bg-base-200">
             <div className="max-w-lg mx-auto">
-              {/* Mock Chat UI */}
               <div className="bg-base-100 rounded-xl shadow-sm overflow-hidden">
                 {/* Chat Header */}
                 <div className="px-4 py-3 border-b border-base-300 bg-base-100">
